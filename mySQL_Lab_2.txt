@@ -1,0 +1,35 @@
+CREATE DATABASE lab_questions;
+
+CREATE TABLE users(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    email varchar(100) NOT NULL,
+    user_name varchar(100) NOT NULL,
+    password varchar(100) NOT NULL,
+    UNIQUE(email,user_name),
+    PRIMARY KEY(id));
+
+CREATE TABLE agents(
+    agent_id int(11) NOT NULL AUTO_INCREMENT,
+    agent_username varchar(50) NOT NULL,
+    agent_password varchar(50) NOT NULL,
+    UNIQUE(agent_username),
+    PRIMARY KEY(agent_id));
+
+CREATE TABLE employees(
+    emp_id int(11) NOT NULL AUTO_INCREMENT,
+    emp_username varchar(50) NOT NULL,
+    emp_password varchar(50) NOT NULL,
+    UNIQUE(emp_username),
+    PRIMARY KEY(emp_id));
+
+CREATE TABLE complaints(
+    id int(11) NOT NULL AUTO_INCREMENT,
+    user_id int(11) NOT NULL,
+    agent_id int(11) NOT NULL,
+    emp_id int(11) NOT NULL,
+    title varchar(50) NOT NULL,
+    description varchar(255) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY(agent_id) REFERENCES agents(agent_id)
+    FOREIGN KEY(emp_id) REFERENCES employees(emp_id));
